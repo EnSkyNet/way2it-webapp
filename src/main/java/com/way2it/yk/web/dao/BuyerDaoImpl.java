@@ -3,8 +3,8 @@ package com.way2it.yk.web.dao;
 
 import com.way2it.yk.web.config.DatabaseConfig;
 import com.way2it.yk.web.config.HibernateSessionConfiguration;
-import com.way2it.yk.web.entity.BuyerEntityMTM;
-import com.way2it.yk.web.entity.CartEntityMTM;
+import com.way2it.yk.web.entity.BuyerEntity;
+import com.way2it.yk.web.entity.CartEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class BuyerDaoMTMImpl implements BuyerDaoMTM {
+public class BuyerDaoImpl implements BuyerDao {
     public static final Logger logger = LogManager.getLogger(Logger.class);
 
     private static SessionFactory sessionFactory = HibernateSessionConfiguration.getSessionFactory();
@@ -27,46 +27,44 @@ public class BuyerDaoMTMImpl implements BuyerDaoMTM {
     }
 
     @Override
-    public List<BuyerEntityMTM> getAllBuyers() {
+    public List<BuyerEntity> getAllBuyers() {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("SELECT buyer FROM BuyerEntityMTM buyer", BuyerEntityMTM.class).getResultList();
+            return session.createQuery("SELECT buyer FROM BuyerEntity buyer", BuyerEntity.class).getResultList();
         }
     }
 
     @Override
-    public void saveBuyer(BuyerEntityMTM buyerEntityMTM) {
+    public void saveBuyer(BuyerEntity buyerEntity) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.save(buyerEntityMTM);
+            session.save(buyerEntity);
             transaction.commit();
         }
     }
     @Override
-    public Optional<BuyerEntityMTM> getBuyerById(Integer buyerId) {
-        return entityManager.createQuery("SELECT buyer FROM BuyerEntityMTM buyer WHERE buyer.id =: buyerId", BuyerEntityMTM.class)
+    public Optional<BuyerEntity> getBuyerById(Integer buyerId) {
+        return entityManager.createQuery("SELECT buyer FROM BuyerEntity buyer WHERE buyer.id =: buyerId", BuyerEntity.class)
                 .setParameter("buyerId", buyerId)
                 .getResultList()
                 .stream()
                 .findFirst();
     }
-
-
      @Override
-    public void deleteBuyer(BuyerEntityMTM buyerEntityMTM) {
+    public void deleteBuyer(BuyerEntity buyerEntity) {
          try (Session session = sessionFactory.openSession()) {
              Transaction transaction = session.beginTransaction();
-             session.remove(buyerEntityMTM);
+             session.remove(buyerEntity);
              transaction.commit();
          }
     }
 
     @Override
-    public List<CartEntityMTM> getCartByBuyerId(Integer buyerId) {
-        return entityManager.createQuery("SELECT buyer FROM BuyerEntityMTM buyer JOIN buyer.cartEntityMTMList WHERE buyer.id =: buyer_id", BuyerEntityMTM.class)
+    public List<CartEntity> getCartByBuyerId(Integer buyerId) {
+        return entityManager.createQuery("SELECT buyer FROM BuyerEntity buyer JOIN buyer.cartEntityList WHERE buyer.id =: buyer_id", BuyerEntity.class)
                 .setParameter("buyer_id", buyerId)
                 .getResultList()
                 .stream()
-                .flatMap(entity->entity.getCartEntityMTMList()
+                .flatMap(entity->entity.getCartEntityList()
                         .stream())
                 .collect(Collectors.toList());
     }

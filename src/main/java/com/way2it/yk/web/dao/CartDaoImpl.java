@@ -3,7 +3,7 @@ package com.way2it.yk.web.dao;
 
 
 import com.way2it.yk.web.config.DatabaseConfig;
-import com.way2it.yk.web.entity.CartEntityMTM;
+import com.way2it.yk.web.entity.CartEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -11,21 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CartDaoMTMImpl implements CartDaoMTM {
+public class CartDaoImpl implements CartDao {
     private static EntityManager entityManager;
 
     static {
         entityManager = DatabaseConfig.getEntityManager();
     }
     @Override
-    public List<CartEntityMTM> getAllCarts() {
-        List<CartEntityMTM> cartEntities = new ArrayList<>();
-        return entityManager.createQuery("SELECT cart FROM CartEntityMTM cart ", CartEntityMTM.class).getResultList();
+    public List<CartEntity> getAllCarts() {
+        List<CartEntity> cartEntities = new ArrayList<>();
+        return entityManager.createQuery("SELECT cart FROM CartEntity cart ", CartEntity.class).getResultList();
     }
 
     @Override
-    public Optional<CartEntityMTM> getCartById(Integer cartId) {
-        return entityManager.createQuery("SELECT cart FROM CartEntityMTM cart WHERE cart.id =: cartId", CartEntityMTM.class)
+    public Optional<CartEntity> getCartById(Integer cartId) {
+        return entityManager.createQuery("SELECT cart FROM CartEntity cart WHERE cart.id =: cartId", CartEntity.class)
                 .setParameter("cartId", cartId)
                 .getResultList()
                 .stream()
@@ -33,18 +33,18 @@ public class CartDaoMTMImpl implements CartDaoMTM {
     }
 
     @Override
-    public void saveCart(CartEntityMTM cartEntityMTM) {
+    public void saveCart(CartEntity cartEntity) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        entityManager.persist(cartEntityMTM);
+        entityManager.persist(cartEntity);
         transaction.commit();
     }
 
     @Override
-    public void deleteCart(CartEntityMTM cartEntityMTM) {
+    public void deleteCart(CartEntity cartEntity) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        entityManager.remove(cartEntityMTM);
+        entityManager.remove(cartEntity);
         transaction.commit();
     }
 }

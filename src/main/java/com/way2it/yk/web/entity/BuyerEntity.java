@@ -2,7 +2,18 @@ package com.way2it.yk.web.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +26,7 @@ import java.util.List;
 @Builder
 @Table(name = "buyer")
 
-public class BuyerEntityMTM {
+public class BuyerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +35,14 @@ public class BuyerEntityMTM {
     private String name;
     @Column
     private Integer money;
-    @OneToMany(mappedBy = "buyerEntityMTM", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<CartEntityMTM> cartEntityMTMList = new ArrayList<>();
+    @OneToMany(mappedBy = "buyerEntity", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<CartEntity> cartEntityList = new ArrayList<>();
 
     @OneToOne(mappedBy = "buyer", cascade = CascadeType.ALL)
-    private OrderEntityMTM orderEntityMTM;
+    private OrderEntity orderEntity;
 
-    @ManyToMany(mappedBy = "buyerEntityMTMList", cascade = CascadeType.ALL)
-    private List<SalerEntityMTM> salerEntityMTMList = new ArrayList<>();
+    @ManyToMany(mappedBy = "buyerEntityList", cascade = CascadeType.ALL)
+    private List<SalerEntity> salerEntityList = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -46,7 +57,7 @@ public class BuyerEntityMTM {
                 +'}';
     }
 
-    public BuyerEntityMTM(String name, Integer money) {
+    public BuyerEntity(String name, Integer money) {
         this.name = name;
         this.money = money;
     }

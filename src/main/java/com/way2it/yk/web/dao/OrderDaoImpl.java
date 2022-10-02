@@ -2,7 +2,7 @@ package com.way2it.yk.web.dao;
 
 
 import com.way2it.yk.web.config.HibernateSessionConfiguration;
-import com.way2it.yk.web.entity.OrderEntityMTM;
+import com.way2it.yk.web.entity.OrderEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -12,33 +12,33 @@ import org.hibernate.Transaction;
 import java.util.List;
 import java.util.Optional;
 
-public class OrderDaoMTMImpl implements OrderDaoMTM {
+public class OrderDaoImpl implements OrderDao {
     public static final Logger logger = LogManager.getLogger(Logger.class);
     private static SessionFactory sessionFactory = HibernateSessionConfiguration.getSessionFactory();
 
     @Override
-    public void deleteOrder(OrderEntityMTM orderEntityMTM) {
+    public void deleteOrder(OrderEntity orderEntity) {
         try(Session session = sessionFactory.openSession()){
             Transaction transaction = session.beginTransaction();
-            session.delete(orderEntityMTM);
+            session.delete(orderEntity);
             transaction.commit();
         }
     }
 
     @Override
-    public void saveOrder(OrderEntityMTM orderEntityMTM) {
+    public void saveOrder(OrderEntity orderEntity) {
         try(Session session = sessionFactory.openSession()){
             Transaction transaction = session.beginTransaction();
-            logger.info(orderEntityMTM);
-            session.save(orderEntityMTM);
+            logger.info(orderEntity);
+            session.save(orderEntity);
             transaction.commit();
         }
     }
 
     @Override
-    public Optional<OrderEntityMTM> findById(Integer id) {
+    public Optional<OrderEntity> findById(Integer id) {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("SELECT orders FROM OrderEntityMTM orders WHERE orders.id =: ordersId" , OrderEntityMTM.class)
+            return session.createQuery("SELECT orders FROM OrderEntity orders WHERE orders.id =: ordersId" , OrderEntity.class)
                     .setParameter("ordersId", id)
                     .getResultList()
                     .stream()
@@ -47,9 +47,9 @@ public class OrderDaoMTMImpl implements OrderDaoMTM {
     }
 
     @Override
-    public List<OrderEntityMTM> findAll() {
+    public List<OrderEntity> findAll() {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("SELECT orders FROM OrderEntityOTO orders", OrderEntityMTM.class).getResultList();
+            return session.createQuery("SELECT orders FROM OrderEntityOTO orders", OrderEntity.class).getResultList();
         }
     }
 }

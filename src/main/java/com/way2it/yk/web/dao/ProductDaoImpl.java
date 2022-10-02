@@ -1,7 +1,7 @@
 package com.way2it.yk.web.dao;
 
 import com.way2it.yk.web.config.DatabaseConfig;
-import com.way2it.yk.web.entity.ProductEntityMTM;
+import com.way2it.yk.web.entity.ProductEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ProductDaoMTMImpl implements ProductDaoMTM {
+public class ProductDaoImpl implements ProductDao {
     private static EntityManager entityManager;
 
     static {
@@ -18,14 +18,14 @@ public class ProductDaoMTMImpl implements ProductDaoMTM {
 
 
     @Override
-    public List<ProductEntityMTM> getAllProducts() {
-        List<ProductEntityMTM> productEntityMTM = new ArrayList<>();
-        return entityManager.createQuery("SELECT product FROM ProductEntityMTM product ", ProductEntityMTM.class).getResultList();
+    public List<ProductEntity> getAllProducts() {
+        List<ProductEntity> productEntity = new ArrayList<>();
+        return entityManager.createQuery("SELECT product FROM ProductEntity product ", ProductEntity.class).getResultList();
     }
 
     @Override
-    public Optional<ProductEntityMTM> getProductById(Integer productId) {
-        return entityManager.createQuery("SELECT product FROM ProductEntityMTM product WHERE product.id =: productId", ProductEntityMTM.class)
+    public Optional<ProductEntity> getProductById(Integer productId) {
+        return entityManager.createQuery("SELECT product FROM ProductEntity product WHERE product.id =: productId", ProductEntity.class)
                 .setParameter("productId", productId)
                 .getResultList()
                 .stream()
@@ -33,18 +33,18 @@ public class ProductDaoMTMImpl implements ProductDaoMTM {
     }
 
     @Override
-    public void saveProduct(ProductEntityMTM productEntityMTM) {
+    public void saveProduct(ProductEntity productEntity) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        entityManager.persist(productEntityMTM);
+        entityManager.persist(productEntity);
         transaction.commit();
     }
 
     @Override
-    public void deleteProduct(ProductEntityMTM productEntityMTM) {
+    public void deleteProduct(ProductEntity productEntity) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        entityManager.remove(productEntityMTM);
+        entityManager.remove(productEntity);
         transaction.commit();
 
     }

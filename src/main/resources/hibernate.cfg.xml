@@ -15,10 +15,10 @@
 
     <property name="hibernate.hbm2ddl.auto">update</property>
 
-    <mapping class="com.way2it.yk.web.entity.SalerEntityMTM" />
-    <mapping class="com.way2it.yk.web.entity.BuyerEntityMTM" />
-    <mapping class="com.way2it.yk.web.entity.CartEntityMTM" />
-    <mapping class="com.way2it.yk.web.entity.OrderEntityMTM" />
-    <mapping class="com.way2it.yk.web.entity.ProductEntityMTM" />
+    <mapping class="com.way2it.yk.web.entity.SalerEntity" />
+    <mapping class="com.way2it.yk.web.entity.BuyerEntity" />
+    <mapping class="com.way2it.yk.web.entity.CartEntity" />
+    <mapping class="com.way2it.yk.web.entity.OrderEntity" />
+    <mapping class="com.way2it.yk.web.entity.ProductEntity" />
   </session-factory>
 </hibernate-configuration>

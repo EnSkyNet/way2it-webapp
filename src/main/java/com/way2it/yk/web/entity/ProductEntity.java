@@ -2,18 +2,24 @@ package com.way2it.yk.web.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.transaction.Transactional;
 
-@Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Entity
+@Builder
 @Table(name = "product")
 
-public class ProductEntityMTM {
+public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,7 +29,7 @@ public class ProductEntityMTM {
     private Integer price;
 
 
-    public ProductEntityMTM(String name, Integer price) {
+    public ProductEntity(String name, Integer price) {
         this.name = name;
         this.price = price;
     }
