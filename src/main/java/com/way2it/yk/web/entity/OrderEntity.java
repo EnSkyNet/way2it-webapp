@@ -1,6 +1,10 @@
 package com.way2it.yk.web.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,7 +30,7 @@ public class OrderEntity {
     @Column
     private Integer total;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private BuyerEntity buyer;
 
     public OrderEntity(Integer total, BuyerEntity buyer) {

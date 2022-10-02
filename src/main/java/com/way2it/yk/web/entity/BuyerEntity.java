@@ -1,6 +1,11 @@
 package com.way2it.yk.web.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,10 +43,10 @@ public class BuyerEntity {
     @OneToMany(mappedBy = "buyerEntity", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<CartEntity> cartEntityList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "buyer", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "buyer")
     private OrderEntity orderEntity;
 
-    @ManyToMany(mappedBy = "buyerEntityList", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "buyerEntityList")
     private List<SalerEntity> salerEntityList = new ArrayList<>();
 
     @Override

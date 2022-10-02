@@ -4,6 +4,7 @@
 <html>
 <head><title>Shop application</title></head>
 <body>
+<h5>Buyers</h5>
 <form action="/shop/serviceBuyer" method="post">
     <label>Name<input type="text" name="name"/></label>
     <label>Money<input type="text" name="money"/></label>
@@ -31,7 +32,7 @@
 </c:forEach>
     </table>
 </c:if>
-
+<h5>Carts</h5>
 <form action="/shop/serviceCart" method="post">
     <label>Shop<input type="text" name="shop"/></label>
     <label>Buyer Id<input type="text" name="buyerId"/></label>
@@ -61,6 +62,87 @@
                 <td>${cart.buyerId}</td>
                 <td>${cart.productId}</td>
                 <td>${cart.productQuantity}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
+<h5>Orders</h5>
+<form action="/shop/serviceOrder" method="post">
+    <label>Total<input type="text" name="total"/></label>
+    <label>Buyer Id<input type="text" name="buyerId"/></label>
+    <input  type="hidden" name="operation" value="add">
+    <input type="submit" name="Submit"/>
+</form>
+<form action="/shop/serviceOrder" method="get">
+    <input  type="hidden" name="operation" value="view">
+    <input type="submit" name="View" value="See orders"/>
+</form>
+<c:if test="${orders != null}">
+    <table border="2px">
+        <caption border="2px">Carts info</caption>
+        <tr>
+            <th>Id</th>
+            <th>Total</th>
+            <th>Buyer Id</th>
+        </tr>
+        <c:forEach items="${orders}" var="order">
+            <tr>
+                <td>${order.id}</td>
+                <td>${order.total}</td>
+                <td>${order.buyerId}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
+<h5>Products</h5>
+<form action="/shop/serviceProduct" method="post">
+    <label>Name<input type="text" name="name"/></label>
+    <label>Price<input type="text" name="price"/></label>
+    <input  type="hidden" name="operation" value="add">
+    <input type="submit" name="Submit"/>
+</form>
+<form action="/shop/serviceProduct" method="get">
+    <input  type="hidden" name="operation" value="view">
+    <input type="submit" name="View" value="See products"/>
+</form>
+<c:if test="${products != null}">
+    <table border="2px">
+        <caption border="2px">Carts info</caption>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        <c:forEach items="${products}" var="product">
+            <tr>
+                <td>${product.id}</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
+<h5>Salers</h5>
+<form action="/shop/serviceSaler" method="post">
+    <label>Name<input type="text" name="name"/></label>
+    <input  type="hidden" name="operation" value="add">
+    <input type="submit" name="Submit"/>
+</form>
+<form action="/shop/serviceSaler" method="get">
+    <input  type="hidden" name="operation" value="view">
+    <input type="submit" name="View" value="See salers"/>
+</form>
+<c:if test="${salers != null}">
+    <table border="2px">
+        <caption border="2px">Salers info</caption>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+        <c:forEach items="${salers}" var="saler">
+            <tr>
+                <td>${saler.id}</td>
+                <td>${saler.name}</td>
             </tr>
         </c:forEach>
     </table>

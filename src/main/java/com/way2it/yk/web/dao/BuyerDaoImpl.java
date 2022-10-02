@@ -29,7 +29,7 @@ public class BuyerDaoImpl implements BuyerDao {
     @Override
     public List<BuyerEntity> getAllBuyers() {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("SELECT buyer FROM BuyerEntity buyer", BuyerEntity.class).getResultList();
+            return session.createQuery("SELECT buyer FROM BuyerEntity buyer ORDER BY id", BuyerEntity.class).getResultList();
         }
     }
 

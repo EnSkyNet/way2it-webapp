@@ -29,7 +29,7 @@ public class OrderDaoImpl implements OrderDao {
     public void saveOrder(OrderEntity orderEntity) {
         try(Session session = sessionFactory.openSession()){
             Transaction transaction = session.beginTransaction();
-            logger.info(orderEntity);
+            //logger.info(orderEntity);
             session.save(orderEntity);
             transaction.commit();
         }
@@ -49,7 +49,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<OrderEntity> findAll() {
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("SELECT orders FROM OrderEntityOTO orders", OrderEntity.class).getResultList();
+            return session.createQuery("SELECT orders FROM OrderEntity orders", OrderEntity.class).getResultList();
         }
     }
 }

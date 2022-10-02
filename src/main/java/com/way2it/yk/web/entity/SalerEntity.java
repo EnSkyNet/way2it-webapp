@@ -1,6 +1,11 @@
 package com.way2it.yk.web.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,7 +37,7 @@ public class SalerEntity {
     private Integer id;
     @Column
     private String name;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "buyer_saler", inverseJoinColumns =
             @JoinColumn(name = "buyer_id"),
             joinColumns = @JoinColumn(name = "saler_id"))
