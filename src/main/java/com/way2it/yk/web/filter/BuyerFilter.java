@@ -6,7 +6,7 @@ import java.io.IOException;
 
 @WebFilter(filterName = "ShopFilter", servletNames = "ShopServlet")
 
-public class ShopFilter implements Filter {
+public class BuyerFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

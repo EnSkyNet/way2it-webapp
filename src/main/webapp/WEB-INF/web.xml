@@ -9,22 +9,22 @@
          version="4.0">
   <display-name>Archetype Created Web Application</display-name>
 <welcome-file-list>
-  <welcome-file>random.jsp</welcome-file>
+  <welcome-file>home.jsp</welcome-file>
 </welcome-file-list>
   <servlet>
-  <servlet-name>ShopServlet</servlet-name>
-  <servlet-class>com.way2it.yk.web.servlet.ShopServlet</servlet-class>
+  <servlet-name>BuyerServlet</servlet-name>
+  <servlet-class>com.way2it.yk.web.servlet.BuyerServlet</servlet-class>
 </servlet>
   <servlet-mapping>
-    <servlet-name>ShopServlet</servlet-name>
+    <servlet-name>BuyerServlet</servlet-name>
     <url-pattern>/shop</url-pattern>
   </servlet-mapping>
   <filter>
-    <filter-name>ShopFilter</filter-name>
-    <filter-class>com.way2it.yk.web.filter.ShopFilter</filter-class>
+    <filter-name>BuyerFilter</filter-name>
+    <filter-class>com.way2it.yk.web.filter.BuyerFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>ShopFilter</filter-name>
+    <filter-name>BuyerFilter</filter-name>
     <url-pattern>/service</url-pattern>
   </filter-mapping>
 </web-app>
